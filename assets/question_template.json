@@ -1,0 +1,36 @@
+{
+    "templates": [
+        {
+            "code": "witnoth",
+            "question": "What is the name of this hero?"
+        },
+        {
+            "code": "witnoti",
+            "question": "What is the name of this item?"
+        },
+        {
+            "code": "witnota",
+            "question": "What is the name of this ability?"
+        },
+        {
+            "code": "whhttr",
+            "question": "What hero has this talent tree?"
+        },
+        {
+            "code": "whhta",
+            "question": "Which hero has this ability?"
+        },
+        {
+            "code": "wsiibtc",
+            "question": "What spell is invoked by this combination?"
+        },
+        {
+            "code": "witmco_dynamic",
+            "question": "What is the mana cost of {ability_name}?"
+        },
+        {
+            "code": "witbmsf_dynamic",
+            "question": "What is the base movement speed for {hero_name}?"
+        }
+    ]
+}
