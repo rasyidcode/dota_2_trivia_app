@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_cubit.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/widget/answer_area.dart';
+import 'package:dota_2_trivia_app/ui/gameplay/widget/loader_area.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/widget/question_area.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/widget/timer_area.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/widget/top_bar.dart';
@@ -24,7 +27,10 @@ class _GameplayPageState extends State<GameplayPage> {
 
     _gameplayCubit.initData();
     _gameplayCubit.initTimer();
-    _gameplayCubit.startTimer();
+
+    Timer(const Duration(seconds: 2), () {
+      _gameplayCubit.startTimer();
+    });
   }
 
   @override
@@ -47,6 +53,13 @@ class _GameplayPageState extends State<GameplayPage> {
             BlocProvider.of<GameplayCubit>(context).loadingAnswer();
             BlocProvider.of<GameplayCubit>(context).lockAnswers();
           }
+
+          bool? loadingNextQuestion = state.isLoadingQuestion;
+          if (loadingNextQuestion != null && loadingNextQuestion == true) {
+            Timer(const Duration(seconds: 2), () {
+              BlocProvider.of<GameplayCubit>(context).loadNextQuestion();
+            });
+          }
         },
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
@@ -64,6 +77,7 @@ class _GameplayPageState extends State<GameplayPage> {
                   Spacer(),
                   TimerArea(),
                   Spacer(),
+                  LoaderArea()
                 ],
               ),
             ),

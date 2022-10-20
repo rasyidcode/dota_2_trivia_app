@@ -16,7 +16,7 @@ enum AnswerStatus {
 
 class GameplayState extends Equatable {
   const GameplayState({
-    // required this.status,
+    required this.status,
     this.questions,
     this.activeQuestion,
     this.timer,
@@ -27,9 +27,10 @@ class GameplayState extends Equatable {
     this.correct,
     this.correctAnswerLabel,
     this.answerLocked,
+    this.isLoadingQuestion,
   });
 
-  // final GameplayStatus status;
+  final GameplayStatus status;
   final List<Map<String, dynamic>>? questions;
   final int? activeQuestion;
   final int? timer;
@@ -40,10 +41,11 @@ class GameplayState extends Equatable {
   final bool? correct;
   final String? correctAnswerLabel;
   final bool? answerLocked;
+  final bool? isLoadingQuestion;
 
   @override
   List<Object?> get props => [
-        // status,
+        status,
         questions,
         activeQuestion,
         timer,
@@ -54,9 +56,11 @@ class GameplayState extends Equatable {
         correct,
         correctAnswerLabel,
         answerLocked,
+        isLoadingQuestion,
       ];
 
   GameplayState copyWith({
+    GameplayStatus? status,
     List<Map<String, dynamic>>? questions,
     int? activeQuestion,
     String? selectedAnswer,
@@ -66,17 +70,20 @@ class GameplayState extends Equatable {
     bool? correct,
     String? correctAnswerLabel,
     bool? answerLocked,
+    bool? isLoadingQuestion,
   }) {
     return GameplayState(
+      status: status ?? this.status,
       questions: questions ?? this.questions,
       activeQuestion: activeQuestion ?? this.activeQuestion,
-      selectedAnswer: selectedAnswer ?? this.selectedAnswer,
       timer: timer ?? this.timer,
       timesUp: timesUp ?? this.timesUp,
-      isLoadingAnswer: isLoadingAnswer ?? this.isLoadingAnswer,
-      correct: correct ?? this.correct,
-      correctAnswerLabel: correctAnswerLabel ?? this.correctAnswerLabel,
-      answerLocked: answerLocked ?? this.answerLocked,
+      isLoadingQuestion: isLoadingQuestion ?? this.isLoadingQuestion,
+      isLoadingAnswer: isLoadingAnswer,
+      correct: correct,
+      correctAnswerLabel: correctAnswerLabel,
+      answerLocked: answerLocked,
+      selectedAnswer: selectedAnswer,
     );
   }
 }

@@ -12,6 +12,10 @@ class TimerArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GameplayCubit, GameplayState>(
       builder: (context, state) {
+        if (state.questions == null) {
+          return Container();
+        }
+
         if (state.timer == null) {
           return Container();
         }

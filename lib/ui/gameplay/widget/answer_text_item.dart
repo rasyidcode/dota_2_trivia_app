@@ -17,6 +17,10 @@ class AnswerTextItem extends StatelessWidget {
     final width = (MediaQuery.of(context).size.width / 2) - (16 * 2 - 8);
     return BlocBuilder<GameplayCubit, GameplayState>(
       builder: (context, state) {
+        if (state.questions == null) {
+          return Container();
+        }
+
         String? selectedAnswer = state.selectedAnswer;
         bool? correct = state.correct;
         Color secondColor = Theme.of(context).primaryColor;

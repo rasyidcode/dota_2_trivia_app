@@ -6,7 +6,8 @@ import 'package:dota_2_trivia_app/data/local/ticker.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
 
 class GameplayCubit extends Cubit<GameplayState> {
-  GameplayCubit(this._ticker) : super(const GameplayState());
+  GameplayCubit(this._ticker)
+      : super(const GameplayState(status: GameplayStatus.initial));
 
   final Ticker _ticker;
 
@@ -98,8 +99,13 @@ class GameplayCubit extends Cubit<GameplayState> {
     },
   ];
 
-  void initData() {
+  void initData() async {
+    emit(state.copyWith(status: GameplayStatus.loading));
+
+    await Future.delayed(const Duration(seconds: 2));
+
     emit(state.copyWith(
+      status: GameplayStatus.success,
       questions: data,
       activeQuestion: 0,
       answerLocked: false,
@@ -130,7 +136,7 @@ class GameplayCubit extends Cubit<GameplayState> {
     checkResult();
   }
 
-  void checkResult() {
+  void checkResult() async {
     var answers = state.questions![state.activeQuestion!]['answers']
         as List<Map<String, dynamic>>;
     var correctAnswer =
@@ -146,6 +152,10 @@ class GameplayCubit extends Cubit<GameplayState> {
         correctAnswerLabel: correctAnswer['label'],
       ));
     }
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    emit(state.copyWith(isLoadingQuestion: true));
   }
 
   void startTimer() {
@@ -166,5 +176,19 @@ class GameplayCubit extends Cubit<GameplayState> {
 
   void closeTimer() {
     _streamSubscription?.cancel();
+  }
+
+  void loadNextQuestion() {
+    emit(state.copyWith(
+      activeQuestion: state.activeQuestion! + 1,
+      isLoadingQuestion: false,
+      timer: _duration,
+      timesUp: false,
+      correct: null,
+      correctAnswerLabel: null,
+      selectedAnswer: null,
+      isLoadingAnswer: null,
+      answerLocked: null,
+    ));
   }
 }
