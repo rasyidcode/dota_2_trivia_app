@@ -26,6 +26,7 @@ class GameplayState extends Equatable {
     this.isLoadingAnswer,
     this.correct,
     this.correctAnswerLabel,
+    this.answerLocked,
   });
 
   // final GameplayStatus status;
@@ -38,6 +39,7 @@ class GameplayState extends Equatable {
   final bool? isLoadingAnswer;
   final bool? correct;
   final String? correctAnswerLabel;
+  final bool? answerLocked;
 
   @override
   List<Object?> get props => [
@@ -51,6 +53,7 @@ class GameplayState extends Equatable {
         isLoadingAnswer,
         correct,
         correctAnswerLabel,
+        answerLocked,
       ];
 
   GameplayState copyWith({
@@ -62,6 +65,7 @@ class GameplayState extends Equatable {
     bool? isLoadingAnswer,
     bool? correct,
     String? correctAnswerLabel,
+    bool? answerLocked,
   }) {
     return GameplayState(
       questions: questions ?? this.questions,
@@ -72,6 +76,7 @@ class GameplayState extends Equatable {
       isLoadingAnswer: isLoadingAnswer ?? this.isLoadingAnswer,
       correct: correct ?? this.correct,
       correctAnswerLabel: correctAnswerLabel ?? this.correctAnswerLabel,
+      answerLocked: answerLocked ?? this.answerLocked,
     );
   }
 }

@@ -99,11 +99,18 @@ class GameplayCubit extends Cubit<GameplayState> {
   ];
 
   void initData() {
-    emit(state.copyWith(questions: data, activeQuestion: 0));
+    emit(state.copyWith(
+      questions: data,
+      activeQuestion: 0,
+      answerLocked: false,
+    ));
   }
 
   void initTimer() {
-    emit(state.copyWith(timer: _duration, timesUp: false));
+    emit(state.copyWith(
+      timer: _duration,
+      timesUp: false,
+    ));
   }
 
   void updateAnswer(String label) {
@@ -115,7 +122,10 @@ class GameplayCubit extends Cubit<GameplayState> {
 
     await Future.delayed(const Duration(seconds: 2));
 
-    emit(state.copyWith(isLoadingAnswer: false, timesUp: false));
+    emit(state.copyWith(
+      isLoadingAnswer: false,
+      timesUp: false,
+    ));
 
     checkResult();
   }
@@ -127,10 +137,14 @@ class GameplayCubit extends Cubit<GameplayState> {
         answers.firstWhere((answer) => answer['correct'] == true);
     if (state.selectedAnswer == correctAnswer['label']) {
       emit(state.copyWith(
-          correct: true, correctAnswerLabel: correctAnswer['label']));
+        correct: true,
+        correctAnswerLabel: correctAnswer['label'],
+      ));
     } else {
       emit(state.copyWith(
-          correct: false, correctAnswerLabel: correctAnswer['label']));
+        correct: false,
+        correctAnswerLabel: correctAnswer['label'],
+      ));
     }
   }
 
@@ -144,6 +158,10 @@ class GameplayCubit extends Cubit<GameplayState> {
         emit(state.copyWith(timesUp: true));
       }
     });
+  }
+
+  void lockAnswers() {
+    emit(state.copyWith(answerLocked: true));
   }
 
   void closeTimer() {
