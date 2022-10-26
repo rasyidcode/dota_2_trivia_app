@@ -10,7 +10,7 @@ class QuestionArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GameplayCubit, GameplayState>(
       builder: (context, state) {
-        List<Map<String, dynamic>>? questions = state.questions;
+        var questions = state.questions;
         if (questions == null) {
           return Container();
         }
@@ -20,7 +20,7 @@ class QuestionArea extends StatelessWidget {
           return Container();
         }
 
-        Map<String, dynamic> currentQuestion = questions[activeQuestion];
+        var currentQuestion = questions[activeQuestion];
 
         return SizedBox(
           height: 150.0,
@@ -29,7 +29,7 @@ class QuestionArea extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  currentQuestion['question'],
+                  currentQuestion.question,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.white70,
                       ),
@@ -37,7 +37,7 @@ class QuestionArea extends StatelessWidget {
               ),
               Expanded(
                 child: Image.network(
-                  currentQuestion['image'],
+                  currentQuestion.image,
                   width: 150,
                 ),
               )

@@ -3,113 +3,42 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:dota_2_trivia_app/data/local/ticker.dart';
+import 'package:dota_2_trivia_app/data/network/dota_data_source.dart';
+import 'package:dota_2_trivia_app/data/repository/question_repository.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
 
 class GameplayCubit extends Cubit<GameplayState> {
-  GameplayCubit(this._ticker)
+  GameplayCubit(this._ticker, this._questionRepository)
       : super(const GameplayState(status: GameplayStatus.initial));
 
   final Ticker _ticker;
+  final QuestionRepository _questionRepository;
 
   final int _duration = 10; // 10 seconds for each question
 
   StreamSubscription? _streamSubscription;
-
-  final List<Map<String, dynamic>> data = [
-    {
-      "question": "What is the name of this hero?",
-      "image":
-          "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/axe.png",
-      "answers": [
-        {
-          "label": "a",
-          "content": "Axe",
-          "correct": true,
-        },
-        {
-          "label": "b",
-          "content": "Anti Mage",
-          "correct": false,
-        },
-        {
-          "label": "c",
-          "content": "Legion Commander",
-          "correct": false,
-        },
-        {
-          "label": "d",
-          "content": "Bounty Hunter",
-          "correct": false,
-        },
-      ]
-    },
-    {
-      "question": "What is the name of this hero?",
-      "image":
-          "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/meepo.png",
-      "answers": [
-        {
-          "label": "a",
-          "content": "Axe",
-          "correct": false,
-        },
-        {
-          "label": "b",
-          "content": "Meepo",
-          "correct": true,
-        },
-        {
-          "label": "c",
-          "content": "Legion Commander",
-          "correct": false,
-        },
-        {
-          "label": "d",
-          "content": "Bounty Hunter",
-          "correct": false,
-        },
-      ]
-    },
-    {
-      "question": "What is the name of this hero?",
-      "image":
-          "https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/puck.png",
-      "answers": [
-        {
-          "label": "a",
-          "content": "Axe",
-          "correct": true,
-        },
-        {
-          "label": "b",
-          "content": "Anti Mage",
-          "correct": false,
-        },
-        {
-          "label": "c",
-          "content": "Puck",
-          "correct": true,
-        },
-        {
-          "label": "d",
-          "content": "Bounty Hunter",
-          "correct": false,
-        },
-      ]
-    },
-  ];
 
   void initData() async {
     emit(state.copyWith(status: GameplayStatus.loading));
 
     await Future.delayed(const Duration(seconds: 2));
 
-    emit(state.copyWith(
-      status: GameplayStatus.success,
-      questions: data,
-      activeQuestion: 0,
-      answerLocked: false,
-    ));
+    try {
+      final questions = await _questionRepository.fetchQuestions();
+      emit(state.copyWith(
+        status: GameplayStatus.success,
+        questions: questions,
+        activeQuestion: 0,
+        answerLocked: false,
+      ));
+    } on FetchHeroesException catch (e) {
+      emit(state.copyWith(status: GameplayStatus.failure, error: e.message));
+    } on HeroesEmptyException catch (e) {
+      emit(state.copyWith(status: GameplayStatus.failure, error: e.message));
+    } on Exception catch (_) {
+      emit(state.copyWith(
+          status: GameplayStatus.failure, error: 'Something went wrong'));
+    }
   }
 
   void initTimer() {
@@ -137,19 +66,18 @@ class GameplayCubit extends Cubit<GameplayState> {
   }
 
   void checkResult() async {
-    var answers = state.questions![state.activeQuestion!]['answers']
-        as List<Map<String, dynamic>>;
-    var correctAnswer =
-        answers.firstWhere((answer) => answer['correct'] == true);
-    if (state.selectedAnswer == correctAnswer['label']) {
+    var answers = state.questions?[state.activeQuestion ?? 0].answers;
+
+    var correctAnswer = answers?.firstWhere((answer) => answer.correct == true);
+    if (state.selectedAnswer == correctAnswer?.label) {
       emit(state.copyWith(
         correct: true,
-        correctAnswerLabel: correctAnswer['label'],
+        correctAnswerLabel: correctAnswer?.label,
       ));
     } else {
       emit(state.copyWith(
         correct: false,
-        correctAnswerLabel: correctAnswer['label'],
+        correctAnswerLabel: correctAnswer?.label,
       ));
     }
 

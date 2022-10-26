@@ -1,3 +1,4 @@
+import 'package:dota_2_trivia_app/data/model/question/question.dart';
 import 'package:equatable/equatable.dart';
 
 enum GameplayStatus {
@@ -29,10 +30,11 @@ class GameplayState extends Equatable {
     this.answerLocked,
     this.isLoadingQuestion,
     this.gameOver,
+    this.error,
   });
 
   final GameplayStatus status;
-  final List<Map<String, dynamic>>? questions;
+  final List<QuestionItem>? questions;
   final int? activeQuestion;
   final int? timer;
   // final List<Question?>? questionResult;
@@ -44,6 +46,7 @@ class GameplayState extends Equatable {
   final bool? answerLocked;
   final bool? isLoadingQuestion;
   final bool? gameOver;
+  final String? error;
 
   @override
   List<Object?> get props => [
@@ -59,11 +62,12 @@ class GameplayState extends Equatable {
         correctAnswerLabel,
         answerLocked,
         isLoadingQuestion,
+        error,
       ];
 
   GameplayState copyWith({
     GameplayStatus? status,
-    List<Map<String, dynamic>>? questions,
+    List<QuestionItem>? questions,
     int? activeQuestion,
     String? selectedAnswer,
     int? timer,
@@ -73,6 +77,7 @@ class GameplayState extends Equatable {
     String? correctAnswerLabel,
     bool? answerLocked,
     bool? isLoadingQuestion,
+    String? error,
   }) {
     return GameplayState(
       status: status ?? this.status,
@@ -86,6 +91,7 @@ class GameplayState extends Equatable {
       correctAnswerLabel: correctAnswerLabel ?? this.correctAnswerLabel,
       answerLocked: answerLocked ?? this.answerLocked,
       selectedAnswer: selectedAnswer ?? this.selectedAnswer,
+      error: error ?? this.error,
     );
   }
 
@@ -106,6 +112,7 @@ class GameplayState extends Equatable {
       correctAnswerLabel: null,
       answerLocked: answerLocked ?? this.answerLocked,
       selectedAnswer: null,
+      error: null,
     );
   }
 
@@ -123,6 +130,7 @@ class GameplayState extends Equatable {
       answerLocked: null,
       selectedAnswer: null,
       gameOver: true,
+      error: null,
     );
   }
 }

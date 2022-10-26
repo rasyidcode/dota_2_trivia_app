@@ -66,6 +66,12 @@ class _GameplayPageState extends State<GameplayPage> {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text('Game is over')));
           }
+
+          String? error = state.error;
+          if (error != null && error.isNotEmpty) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(error)));
+          }
         },
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,

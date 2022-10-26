@@ -19,8 +19,7 @@ class AnswerArea extends StatelessWidget {
           return Container();
         }
 
-        final answers =
-            state.questions![state.activeQuestion!]['answers'] as List;
+        final answers = state.questions![state.activeQuestion!].answers;
 
         return Column(
           children: [
@@ -28,9 +27,8 @@ class AnswerArea extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: answers
                   .take(2)
-                  .map((item) => AnswerItem(
-                      label: item['label'] as String,
-                      content: item['content'] as String))
+                  .map((item) =>
+                      AnswerItem(label: item.label, content: item.content))
                   .toList(),
             ),
             const SizedBox(height: 16.0),
@@ -38,9 +36,8 @@ class AnswerArea extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: answers
                   .skip(2)
-                  .map((item) => AnswerItem(
-                      label: item['label'] as String,
-                      content: item['content'] as String))
+                  .map((item) =>
+                      AnswerItem(label: item.label, content: item.content))
                   .toList(),
             ),
           ],

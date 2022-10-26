@@ -39,6 +39,7 @@ dependencies:
   equatable: ^2.0.5
   json_annotation: ^4.7.0
   kiwi: ^4.0.2
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
