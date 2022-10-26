@@ -13,6 +13,7 @@ QuestionItem _$QuestionItemFromJson(Map<String, dynamic> json) => QuestionItem(
           .map((e) => AnswerItem.fromJson(e as Map<String, dynamic>))
           .toList(),
       answerType: json['answer_type'] as String,
+      templateId: json['template_id'] as int,
     );
 
 Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
       'image': instance.image,
       'answers': instance.answers,
       'answer_type': instance.answerType,
+      'template_id': instance.templateId,
     };

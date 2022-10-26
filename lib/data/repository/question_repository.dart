@@ -66,7 +66,8 @@ class QuestionRepository {
                     "correct": item.id == hero.id
                   })
               .toList(),
-          "answer_type": "text"
+          "answer_type": "text",
+          "template_id": template['id'],
         };
       } else if (template['id'] == 2) {
         String formedQuestion = (template['question'] as String)
@@ -81,7 +82,8 @@ class QuestionRepository {
                     "correct": item.id == hero.id
                   })
               .toList(),
-          "answer_type": "image"
+          "answer_type": "image",
+          "template_id": template['id'],
         };
       } else if (template['id'] == 3) {
         List<String> customOptions = [
@@ -99,7 +101,8 @@ class QuestionRepository {
                     "correct": item == hero.primaryAttr,
                   })
               .toList(),
-          "answer_type": "text"
+          "answer_type": "text",
+          "template_id": template['id'],
         };
       } else {
         question = {};

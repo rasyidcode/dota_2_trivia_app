@@ -108,7 +108,9 @@ class AnswerItem extends StatelessWidget {
                 Center(
                     child: (qItem.answerType == 'text')
                         ? Text(
-                            content,
+                            qItem.templateId == 3
+                                ? content.toUpperCase()
+                                : content,
                             style: Theme.of(context).textTheme.bodySmall,
                           )
                         : Image.network(

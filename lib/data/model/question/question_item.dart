@@ -11,6 +11,7 @@ class QuestionItem {
     required this.image,
     required this.answers,
     required this.answerType,
+    required this.templateId,
   });
 
   final String question;
@@ -18,6 +19,8 @@ class QuestionItem {
   final List<AnswerItem> answers;
   @JsonKey(name: 'answer_type')
   final String answerType;
+  @JsonKey(name: 'template_id')
+  final int templateId;
 
   factory QuestionItem.fromJson(Map<String, dynamic> json) =>
       _$QuestionItemFromJson(json);
