@@ -10,7 +10,7 @@ HeroItem _$HeroItemFromJson(Map<String, dynamic> json) => HeroItem(
       id: json['id'] as int,
       name: json['localized_name'] as String,
       primaryAttr: json['primary_attr'] as String,
-      img: json['img'] as String,
+      img: json['img'] as String?,
     );
 
 Map<String, dynamic> _$HeroItemToJson(HeroItem instance) => <String, dynamic>{

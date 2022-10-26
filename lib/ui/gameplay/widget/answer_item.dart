@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dota_2_trivia_app/data/model/question/question.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_cubit.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,15 @@ class AnswerItem extends StatelessWidget {
           return Container();
         }
 
+        if (state.activeQuestion == null) {
+          return Container();
+        }
+
         String? selectedAnswer = state.selectedAnswer;
         bool? correct = state.correct;
         bool? isCorrect;
         bool? answerLocked = state.answerLocked;
+        QuestionItem qItem = state.questions![state.activeQuestion!];
 
         Color secondColor = Theme.of(context).primaryColor;
         String? correctAnswerLabel = state.correctAnswerLabel;
@@ -81,7 +87,6 @@ class AnswerItem extends StatelessWidget {
             height: 90.0,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white10, width: 1.5),
-              // color: Theme.of(context).primaryColor.withBlue(80).withOpacity(0.5),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -101,11 +106,15 @@ class AnswerItem extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Text(
-                    content,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ),
+                    child: (qItem.answerType == 'text')
+                        ? Text(
+                            content,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          )
+                        : Image.network(
+                            content,
+                            width: 150,
+                          )),
                 isCorrect == null
                     ? Container()
                     : Positioned(

@@ -36,10 +36,12 @@ class QuestionArea extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Image.network(
-                  currentQuestion.image,
-                  width: 150,
-                ),
+                child: currentQuestion.image != null
+                    ? Image.network(
+                        currentQuestion.image!,
+                        width: 150,
+                      )
+                    : const SizedBox(width: 150),
               )
             ],
           ),

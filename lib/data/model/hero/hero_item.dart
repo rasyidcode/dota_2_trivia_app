@@ -16,7 +16,7 @@ class HeroItem {
   final String name;
   @JsonKey(name: 'primary_attr')
   final String primaryAttr;
-  final String img;
+  final String? img;
 
   factory HeroItem.fromJson(Map<String, dynamic> json) =>
       _$HeroItemFromJson(json);

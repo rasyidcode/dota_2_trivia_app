@@ -21,27 +21,13 @@ class AnswerArea extends StatelessWidget {
 
         final answers = state.questions![state.activeQuestion!].answers;
 
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: answers
-                  .take(2)
-                  .map((item) =>
-                      AnswerItem(label: item.label, content: item.content))
-                  .toList(),
-            ),
-            const SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: answers
-                  .skip(2)
-                  .map((item) =>
-                      AnswerItem(label: item.label, content: item.content))
-                  .toList(),
-            ),
-          ],
-        );
+        return Wrap(
+            spacing: 16.0,
+            runSpacing: 16.0,
+            children: answers
+                .map((answer) =>
+                    AnswerItem(label: answer.label, content: answer.content))
+                .toList());
       },
     );
   }

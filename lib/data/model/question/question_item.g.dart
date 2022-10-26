@@ -8,10 +8,11 @@ part of 'question_item.dart';
 
 QuestionItem _$QuestionItemFromJson(Map<String, dynamic> json) => QuestionItem(
       question: json['question'] as String,
-      image: json['image'] as String,
+      image: json['image'] as String?,
       answers: (json['answers'] as List<dynamic>)
           .map((e) => AnswerItem.fromJson(e as Map<String, dynamic>))
           .toList(),
+      answerType: json['answer_type'] as String,
     );
 
 Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
       'question': instance.question,
       'image': instance.image,
       'answers': instance.answers,
+      'answer_type': instance.answerType,
     };
