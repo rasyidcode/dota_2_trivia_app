@@ -5,8 +5,8 @@ import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AnswerTextItem extends StatelessWidget {
-  const AnswerTextItem({Key? key, required this.label, required this.content})
+class AnswerItem extends StatelessWidget {
+  const AnswerItem({Key? key, required this.label, required this.content})
       : super(key: key);
 
   final String label;
@@ -23,10 +23,11 @@ class AnswerTextItem extends StatelessWidget {
 
         String? selectedAnswer = state.selectedAnswer;
         bool? correct = state.correct;
-        Color secondColor = Theme.of(context).primaryColor;
         bool? isCorrect;
-        String? correctAnswerLabel = state.correctAnswerLabel;
         bool? answerLocked = state.answerLocked;
+
+        Color secondColor = Theme.of(context).primaryColor;
+        String? correctAnswerLabel = state.correctAnswerLabel;
 
         if (correct == null) {
           if (selectedAnswer == null) {

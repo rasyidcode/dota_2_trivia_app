@@ -60,6 +60,12 @@ class _GameplayPageState extends State<GameplayPage> {
               BlocProvider.of<GameplayCubit>(context).loadNextQuestion();
             });
           }
+
+          bool? gameOver = state.gameOver;
+          if (gameOver != null && gameOver) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text('Game is over')));
+          }
         },
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,

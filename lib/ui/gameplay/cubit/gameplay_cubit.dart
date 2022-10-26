@@ -179,16 +179,21 @@ class GameplayCubit extends Cubit<GameplayState> {
   }
 
   void loadNextQuestion() {
-    emit(state.copyWith(
-      activeQuestion: state.activeQuestion! + 1,
-      isLoadingQuestion: false,
-      timer: _duration,
-      timesUp: false,
-      correct: null,
-      correctAnswerLabel: null,
-      selectedAnswer: null,
-      isLoadingAnswer: null,
-      answerLocked: null,
-    ));
+    int nextQuestion = state.activeQuestion! + 1;
+    int totalQuestion = state.questions!.length;
+
+    if (nextQuestion < totalQuestion) {
+      emit(
+        state.resetAndLoadNext(
+          activeQuestion: nextQuestion,
+          timer: _duration,
+          answerLocked: false,
+        ),
+      );
+
+      startTimer();
+    } else {
+      emit(state.gameIsOver());
+    }
   }
 }

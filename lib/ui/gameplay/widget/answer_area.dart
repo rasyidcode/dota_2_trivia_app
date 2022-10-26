@@ -1,6 +1,6 @@
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_cubit.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/cubit/gameplay_state.dart';
-import 'package:dota_2_trivia_app/ui/gameplay/widget/answer_text_item.dart';
+import 'package:dota_2_trivia_app/ui/gameplay/widget/answer_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +28,7 @@ class AnswerArea extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: answers
                   .take(2)
-                  .map((item) => AnswerTextItem(
+                  .map((item) => AnswerItem(
                       label: item['label'] as String,
                       content: item['content'] as String))
                   .toList(),
@@ -38,7 +38,7 @@ class AnswerArea extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: answers
                   .skip(2)
-                  .map((item) => AnswerTextItem(
+                  .map((item) => AnswerItem(
                       label: item['label'] as String,
                       content: item['content'] as String))
                   .toList(),

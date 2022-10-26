@@ -28,6 +28,7 @@ class GameplayState extends Equatable {
     this.correctAnswerLabel,
     this.answerLocked,
     this.isLoadingQuestion,
+    this.gameOver,
   });
 
   final GameplayStatus status;
@@ -42,6 +43,7 @@ class GameplayState extends Equatable {
   final String? correctAnswerLabel;
   final bool? answerLocked;
   final bool? isLoadingQuestion;
+  final bool? gameOver;
 
   @override
   List<Object?> get props => [
@@ -79,11 +81,48 @@ class GameplayState extends Equatable {
       timer: timer ?? this.timer,
       timesUp: timesUp ?? this.timesUp,
       isLoadingQuestion: isLoadingQuestion ?? this.isLoadingQuestion,
-      isLoadingAnswer: isLoadingAnswer,
-      correct: correct,
-      correctAnswerLabel: correctAnswerLabel,
-      answerLocked: answerLocked,
-      selectedAnswer: selectedAnswer,
+      isLoadingAnswer: isLoadingAnswer ?? this.isLoadingAnswer,
+      correct: correct ?? this.correct,
+      correctAnswerLabel: correctAnswerLabel ?? this.correctAnswerLabel,
+      answerLocked: answerLocked ?? this.answerLocked,
+      selectedAnswer: selectedAnswer ?? this.selectedAnswer,
+    );
+  }
+
+  GameplayState resetAndLoadNext({
+    int? activeQuestion,
+    int? timer,
+    bool? answerLocked,
+  }) {
+    return GameplayState(
+      status: status,
+      questions: questions,
+      activeQuestion: activeQuestion ?? this.activeQuestion,
+      timer: timer ?? this.timer,
+      timesUp: null,
+      isLoadingQuestion: null,
+      isLoadingAnswer: null,
+      correct: null,
+      correctAnswerLabel: null,
+      answerLocked: answerLocked ?? this.answerLocked,
+      selectedAnswer: null,
+    );
+  }
+
+  GameplayState gameIsOver() {
+    return GameplayState(
+      status: status,
+      questions: null,
+      activeQuestion: null,
+      timer: null,
+      timesUp: null,
+      isLoadingQuestion: null,
+      isLoadingAnswer: null,
+      correct: null,
+      correctAnswerLabel: null,
+      answerLocked: null,
+      selectedAnswer: null,
+      gameOver: true,
     );
   }
 }
