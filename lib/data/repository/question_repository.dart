@@ -29,18 +29,43 @@ class QuestionRepository {
         "id": 1,
         "question": 'What is the name of this hero?',
         "answer_type": 'text',
+        "difficulty": "easy",
       },
       {
         "id": 2,
         "question": 'Which of these hero named {replace}?',
         "answer_type": 'image',
+        "difficulty": "easy",
       },
       {
         "id": 3,
         "question": 'What is the primary attribute of this hero?',
         "answer_type": 'text_icon',
+        "difficulty": "easy",
+      },
+      {
+        "id": 4,
+        "question": 'Which of these hero has primary attribute of {replace}?',
+        "answer_type": 'text_icon',
+        "difficulty": "easy",
+      },
+      {
+        "id": 5,
+        "question": 'What is the movement speed of this hero?',
+        "answer_type": 'text_icon',
+        "difficulty": "hard",
+      },
+      {
+        "id": 6,
+        "question": 'What is the attack type of this hero?',
+        "answer_type": 'text_icon',
+        "difficulty": "medium",
       },
     ];
+    templates.removeWhere((element) => element['id'] == 4);
+    templates.removeWhere((element) => element['id'] == 5);
+    // templates.removeWhere((element) => element['id'] == 4);
+
     List<String> labels = ['a', 'b', 'c', 'd'];
 
     (heroesResult.heroes..shuffle()).take(10).forEach((hero) {
