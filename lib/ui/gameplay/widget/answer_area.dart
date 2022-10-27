@@ -9,26 +9,32 @@ class AnswerArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GameplayCubit, GameplayState>(
-      builder: (context, state) {
-        if (state.questions == null) {
-          return Container();
-        }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: BlocBuilder<GameplayCubit, GameplayState>(
+        builder: (context, state) {
+          if (state.questions == null) {
+            return Container();
+          }
 
-        if (state.activeQuestion == null) {
-          return Container();
-        }
+          if (state.activeQuestion == null) {
+            return Container();
+          }
 
-        final answers = state.questions![state.activeQuestion!].answers;
+          final answers = state.questions![state.activeQuestion!].answers;
 
-        return Wrap(
-            spacing: 16.0,
-            runSpacing: 16.0,
-            children: answers
-                .map((answer) =>
-                    AnswerItem(label: answer.label, content: answer.content))
-                .toList());
-      },
+          return Wrap(
+              spacing: 16.0,
+              runSpacing: 16.0,
+              children: answers
+                  .map((answer) => AnswerItem(
+                        label: answer.label,
+                        content: answer.content,
+                        icon: answer.icon,
+                      ))
+                  .toList());
+        },
+      ),
     );
   }
 }

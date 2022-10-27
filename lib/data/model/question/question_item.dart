@@ -12,6 +12,7 @@ class QuestionItem {
     required this.answers,
     required this.answerType,
     required this.templateId,
+    required this.hideLabel,
   });
 
   final String question;
@@ -21,6 +22,8 @@ class QuestionItem {
   final String answerType;
   @JsonKey(name: 'template_id')
   final int templateId;
+  @JsonKey(name: 'hide_label')
+  final bool hideLabel;
 
   factory QuestionItem.fromJson(Map<String, dynamic> json) =>
       _$QuestionItemFromJson(json);

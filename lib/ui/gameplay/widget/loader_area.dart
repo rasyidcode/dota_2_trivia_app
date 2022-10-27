@@ -28,37 +28,42 @@ class LoaderArea extends StatelessWidget {
 
         activeQuestion = state.activeQuestion;
 
-        return Row(
-          children: [
-            if (showLoading || state.status == GameplayStatus.loading)
-              Row(
-                children: [
-                  Text(
-                    'Loading ${showLoading ? 'next' : ''} question',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  const SizedBox(
-                    width: 20.0,
-                    height: 20.0,
-                    child: CircularProgressIndicator(
-                      color: Colors.white70,
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Row(
+            children: [
+              Opacity(
+                opacity: showLoading || state.status == GameplayStatus.loading
+                    ? 1
+                    : 0,
+                child: Row(
+                  children: [
+                    Text(
+                      'Loading ${showLoading ? 'next' : ''} question',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                          ),
                     ),
-                  )
-                ],
+                    const SizedBox(width: 8.0),
+                    const SizedBox(
+                      width: 20.0,
+                      height: 20.0,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Text(
+                '#${(activeQuestion ?? -1) + 1} of 10',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                    ),
               )
-            else
-              Container(),
-            const Spacer(),
-            Text(
-              '#${(activeQuestion ?? -1) + 1} of 10',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
-                  ),
-            )
-          ],
+            ],
+          ),
         );
       },
     );

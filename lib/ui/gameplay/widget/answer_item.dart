@@ -7,15 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnswerItem extends StatelessWidget {
-  const AnswerItem({Key? key, required this.label, required this.content})
-      : super(key: key);
+  const AnswerItem({
+    Key? key,
+    required this.label,
+    required this.content,
+    this.icon,
+  }) : super(key: key);
 
   final String label;
   final String content;
+  final String? icon;
 
   @override
   Widget build(BuildContext context) {
     final width = (MediaQuery.of(context).size.width / 2) - (16 * 2 - 8);
+    final height = MediaQuery.of(context).size.height * 0.12;
+
     return BlocBuilder<GameplayCubit, GameplayState>(
       builder: (context, state) {
         if (state.questions == null) {
@@ -84,7 +91,7 @@ class AnswerItem extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(5.0),
             width: width,
-            height: 90.0,
+            height: height,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white10, width: 1.5),
               gradient: LinearGradient(
@@ -99,24 +106,23 @@ class AnswerItem extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 2.0),
                   child: SizedBox(
                     width: double.infinity,
-                    child: Text(
-                      label.toUpperCase(),
-                      style: Theme.of(context).textTheme.bodySmall,
+                    child: Opacity(
+                      opacity: qItem.hideLabel ? 0 : 1,
+                      child: Text(
+                        label.toUpperCase(),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                     ),
                   ),
                 ),
-                Center(
-                    child: (qItem.answerType == 'text')
-                        ? Text(
-                            qItem.templateId == 3
-                                ? content.toUpperCase()
-                                : content,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          )
-                        : Image.network(
-                            content,
-                            width: 150,
-                          )),
+                if (qItem.answerType == 'text')
+                  AnswerContentTextOnly(text: content)
+                else if (qItem.answerType == 'image')
+                  AnswerContentImage(url: content)
+                else if (qItem.answerType == 'text_icon')
+                  AnswerContentTextIcon(text: content, iconURL: icon ?? '')
+                else
+                  Container(),
                 isCorrect == null
                     ? Container()
                     : Positioned(
@@ -140,6 +146,62 @@ class AnswerItem extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class AnswerContentTextOnly extends StatelessWidget {
+  const AnswerContentTextOnly({Key? key, required this.text}) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+    );
+  }
+}
+
+class AnswerContentTextIcon extends StatelessWidget {
+  const AnswerContentTextIcon(
+      {Key? key, required this.iconURL, required this.text})
+      : super(key: key);
+
+  final String iconURL;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(text.toUpperCase(),
+              style: Theme.of(context).textTheme.bodySmall),
+          const SizedBox(width: 8.0),
+          Image.network(iconURL, width: 20.0)
+        ],
+      ),
+    );
+  }
+}
+
+class AnswerContentImage extends StatelessWidget {
+  const AnswerContentImage({Key? key, required this.url}) : super(key: key);
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Image.network(
+        url,
+        width: 150,
+      ),
     );
   }
 }

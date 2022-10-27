@@ -1,3 +1,4 @@
+import 'package:dota_2_trivia_app/constant/colors.dart';
 import 'package:dota_2_trivia_app/injection_container.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/gameplay_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class Dota2TriviaApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-        primaryColor: const Color(0xFF1B2838),
+        primaryColor: kPrimaryColor,
       ),
       home: const GameplayPage(),
     );

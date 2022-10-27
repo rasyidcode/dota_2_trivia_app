@@ -23,7 +23,7 @@ class TimerArea extends StatelessWidget {
         bool? isLoadingAnswer = state.isLoadingAnswer;
         if (isLoadingAnswer != null && isLoadingAnswer) {
           return const CircularProgressIndicator(
-            color: Colors.white70,
+            color: Colors.white,
           );
         }
 
@@ -44,7 +44,7 @@ class TimerArea extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         letterSpacing: 2.0,
-                        color: Colors.white70,
+                        color: Colors.white,
                       ),
                 ),
               ],
@@ -77,14 +77,16 @@ class TimerArea extends StatelessWidget {
             Text(
               '00:${state.timer.toString().padLeft(2, '0')}',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: Colors.white,
+                  ),
             ),
             Text(
               'TIME REMAINING',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     letterSpacing: 2.0,
-                    color: Colors.white70,
+                    color: Colors.white,
                   ),
             ),
           ],

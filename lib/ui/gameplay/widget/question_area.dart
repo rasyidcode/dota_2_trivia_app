@@ -22,28 +22,31 @@ class QuestionArea extends StatelessWidget {
 
         var currentQuestion = questions[activeQuestion];
 
-        return SizedBox(
-          height: 150.0,
-          child: Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  currentQuestion.question,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white70,
-                      ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SizedBox(
+            height: 150.0,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    currentQuestion.question,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white70,
+                        ),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: currentQuestion.image != null
-                    ? Image.network(
-                        currentQuestion.image!,
-                        width: 150,
-                      )
-                    : const SizedBox(width: 150),
-              )
-            ],
+                Expanded(
+                  child: currentQuestion.image != null
+                      ? Image.network(
+                          currentQuestion.image!,
+                          width: 150,
+                        )
+                      : const SizedBox(width: 150),
+                )
+              ],
+            ),
           ),
         );
       },

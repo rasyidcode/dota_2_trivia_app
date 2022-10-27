@@ -10,6 +10,7 @@ AnswerItem _$AnswerItemFromJson(Map<String, dynamic> json) => AnswerItem(
       label: json['label'] as String,
       content: json['content'] as String,
       correct: json['correct'] as bool,
+      icon: json['icon'] as String?,
     );
 
 Map<String, dynamic> _$AnswerItemToJson(AnswerItem instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$AnswerItemToJson(AnswerItem instance) =>
       'label': instance.label,
       'content': instance.content,
       'correct': instance.correct,
+      'icon': instance.icon,
     };

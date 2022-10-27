@@ -38,7 +38,7 @@ class QuestionRepository {
       {
         "id": 3,
         "question": 'What is the primary attribute of this hero?',
-        "answer_type": 'text',
+        "answer_type": 'text_icon',
       },
     ];
     List<String> labels = ['a', 'b', 'c', 'd'];
@@ -66,8 +66,9 @@ class QuestionRepository {
                     "correct": item.id == hero.id
                   })
               .toList(),
-          "answer_type": "text",
+          "answer_type": template['answer_type'],
           "template_id": template['id'],
+          'hide_label': false,
         };
       } else if (template['id'] == 2) {
         String formedQuestion = (template['question'] as String)
@@ -82,14 +83,30 @@ class QuestionRepository {
                     "correct": item.id == hero.id
                   })
               .toList(),
-          "answer_type": "image",
+          "answer_type": template['answer_type'],
           "template_id": template['id'],
+          'hide_label': false,
         };
       } else if (template['id'] == 3) {
-        List<String> customOptions = [
-          'str',
-          'agi',
-          'int',
+        List<Map<String, dynamic>> customOptions = [
+          {
+            'code': 'str',
+            'name': 'strength',
+            'icon':
+                'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/hero_strength.png'
+          },
+          {
+            'code': 'agi',
+            'name': 'agility',
+            'icon':
+                'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/hero_agility.png'
+          },
+          {
+            'code': 'int',
+            'name': 'intelligence',
+            'icon':
+                'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/hero_intelligence.png'
+          },
         ];
         question = {
           "question": template['question'],
@@ -97,12 +114,14 @@ class QuestionRepository {
           "answers": customOptions
               .map((item) => {
                     "label": labels[customOptions.indexOf(item)],
-                    "content": item,
-                    "correct": item == hero.primaryAttr,
+                    "content": item['code'],
+                    "icon": item['icon'],
+                    "correct": item['code'] == hero.primaryAttr,
                   })
               .toList(),
-          "answer_type": "text",
+          "answer_type": template['answer_type'],
           "template_id": template['id'],
+          'hide_label': true,
         };
       } else {
         question = {};

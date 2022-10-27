@@ -14,6 +14,7 @@ QuestionItem _$QuestionItemFromJson(Map<String, dynamic> json) => QuestionItem(
           .toList(),
       answerType: json['answer_type'] as String,
       templateId: json['template_id'] as int,
+      hideLabel: json['hide_label'] as bool,
     );
 
 Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
       'answers': instance.answers,
       'answer_type': instance.answerType,
       'template_id': instance.templateId,
+      'hide_label': instance.hideLabel,
     };

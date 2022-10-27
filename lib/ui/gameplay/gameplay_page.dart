@@ -76,22 +76,18 @@ class _GameplayPageState extends State<GameplayPage> {
         child: Scaffold(
           backgroundColor: Theme.of(context).primaryColor,
           body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: const [
-                  TopBar(),
-                  Divider(),
-                  SizedBox(height: 8.0),
-                  QuestionArea(),
-                  SizedBox(height: 16.0),
-                  AnswerArea(),
-                  Spacer(),
-                  TimerArea(),
-                  Spacer(),
-                  LoaderArea()
-                ],
-              ),
+            child: Column(
+              children: const [
+                TopBar(),
+                SizedBox(height: 8.0),
+                QuestionArea(),
+                SizedBox(height: 16.0),
+                AnswerArea(),
+                Spacer(),
+                TimerArea(),
+                Spacer(),
+                LoaderArea()
+              ],
             ),
           ),
         ),
