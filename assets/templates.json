@@ -1,0 +1,118 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "question": "What is the name of this hero?",
+            "answer_type": "text",
+            "difficulty": "easy"
+        },
+        {
+            "id": 2,
+            "question": "Which of these hero named {replace}?",
+            "answer_type": "image",
+            "difficulty": "easy"
+        },
+        {
+            "id": 3,
+            "question": "What is the primary attribute of this hero?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 4,
+            "question": "Which of these hero has primary attribute of {replace}?",
+            "answer_type": "image",
+            "difficulty": "medium"
+        },
+        {
+            "id": 5,
+            "question": "What is the movement speed of this hero?",
+            "answer_type": "text_icon",
+            "difficulty": "hard"
+        },
+        {
+            "id": 6,
+            "question": "What is the attack type of this hero?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 7,
+            "question": "How many legs of this hero has?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 8,
+            "question": "Which hero has this ability?",
+            "answer_type": "image",
+            "difficulty": "medium"
+        },
+        {
+            "id": 9,
+            "question": "What is the name of this ability?",
+            "answer_type": "text",
+            "difficulty": "hard"
+        },
+        {
+            "id": 10,
+            "question": "What is the mana cost of this ability?",
+            "answer_type": "text_icon",
+            "difficulty": "hard"
+        },
+        {
+            "id": 11,
+            "question": "What is the mana cost of this ability?",
+            "answer_type": "text_icon",
+            "difficulty": "hard"
+        },
+        {
+            "id": 12,
+            "question": "What is the damage type of this ability?",
+            "answer_type": "text_icon",
+            "difficulty": "hard"
+        },
+        {
+            "id": 13,
+            "question": "What is the cooldown of this ability?",
+            "answer_type": "text_icon",
+            "difficulty": "hard"
+        },
+        {
+            "id": 14,
+            "question": "What is the name of this item?",
+            "answer_type": "text",
+            "difficulty": "medium"
+        },
+        {
+            "id": 15,
+            "question": "What is the cost of this item?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 16,
+            "question": "What is the cooldown of this item?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 17,
+            "question": "What is the cooldown of this item?",
+            "answer_type": "text_icon",
+            "difficulty": "medium"
+        },
+        {
+            "id": 18,
+            "question": "Which of these abilities named {replace}?",
+            "answer_type": "image",
+            "difficulty": "hard"
+        },
+        {
+            "id": 19,
+            "question": "Which of these items named {replace}?",
+            "answer_type": "image",
+            "difficulty": "hard"
+        }
+    ]
+}

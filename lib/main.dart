@@ -1,5 +1,6 @@
 import 'package:dota_2_trivia_app/constant/colors.dart';
 import 'package:dota_2_trivia_app/injection_container.dart';
+import 'package:dota_2_trivia_app/ui/endless/endless_page.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/gameplay_page.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class Dota2TriviaApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         primaryColor: kPrimaryColor,
       ),
-      home: const GameplayPage(),
+      home: const EndlessPage(),
     );
   }
 }

@@ -57,7 +57,7 @@ class LoaderArea extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '#${(activeQuestion ?? -1) + 1}',
+                '#${(activeQuestion ?? -1) + 1} of #10',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.white,
                     ),

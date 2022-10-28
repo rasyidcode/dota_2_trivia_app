@@ -1,15 +1,15 @@
 import 'package:dota_2_trivia_app/data/model/question/question.dart';
 import 'package:equatable/equatable.dart';
 
-enum GameplayStatus {
+enum EndlessStatus {
   initial,
   loading,
   failure,
   success,
 }
 
-class GameplayState extends Equatable {
-  const GameplayState({
+class EndlessState extends Equatable {
+  const EndlessState({
     required this.status,
     this.questions,
     this.activeQuestion,
@@ -25,7 +25,7 @@ class GameplayState extends Equatable {
     this.error,
   });
 
-  final GameplayStatus status;
+  final EndlessStatus status;
   final List<QuestionItem>? questions;
   final int? activeQuestion;
   final int? timer;
@@ -55,8 +55,8 @@ class GameplayState extends Equatable {
         error,
       ];
 
-  GameplayState copyWith({
-    GameplayStatus? status,
+  EndlessState copyWith({
+    EndlessStatus? status,
     List<QuestionItem>? questions,
     int? activeQuestion,
     String? selectedAnswer,
@@ -69,7 +69,7 @@ class GameplayState extends Equatable {
     bool? isLoadingQuestion,
     String? error,
   }) {
-    return GameplayState(
+    return EndlessState(
       status: status ?? this.status,
       questions: questions ?? this.questions,
       activeQuestion: activeQuestion ?? this.activeQuestion,
@@ -82,45 +82,6 @@ class GameplayState extends Equatable {
       answerLocked: answerLocked ?? this.answerLocked,
       selectedAnswer: selectedAnswer ?? this.selectedAnswer,
       error: error ?? this.error,
-    );
-  }
-
-  GameplayState resetAndLoadNext({
-    int? activeQuestion,
-    int? timer,
-    bool? answerLocked,
-  }) {
-    return GameplayState(
-      status: status,
-      questions: questions,
-      activeQuestion: activeQuestion ?? this.activeQuestion,
-      timer: timer ?? this.timer,
-      timesUp: null,
-      isLoadingQuestion: null,
-      isLoadingAnswer: null,
-      correct: null,
-      correctAnswerLabel: null,
-      answerLocked: answerLocked ?? this.answerLocked,
-      selectedAnswer: null,
-      error: null,
-    );
-  }
-
-  GameplayState gameIsOver() {
-    return GameplayState(
-      status: status,
-      questions: null,
-      activeQuestion: null,
-      timer: null,
-      timesUp: null,
-      isLoadingQuestion: null,
-      isLoadingAnswer: null,
-      correct: null,
-      correctAnswerLabel: null,
-      answerLocked: null,
-      selectedAnswer: null,
-      gameOver: true,
-      error: null,
     );
   }
 }

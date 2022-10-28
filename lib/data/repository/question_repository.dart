@@ -64,7 +64,7 @@ class QuestionRepository {
     ];
     templates.removeWhere((element) => element['id'] == 4);
     templates.removeWhere((element) => element['id'] == 5);
-    // templates.removeWhere((element) => element['id'] == 4);
+    templates.removeWhere((element) => element['id'] == 6);
 
     List<String> labels = ['a', 'b', 'c', 'd'];
 
