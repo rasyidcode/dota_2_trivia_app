@@ -3,116 +3,97 @@
         {
             "id": 1,
             "question": "What is the name of this hero?",
-            "answer_type": "text",
-            "difficulty": "easy"
+            "answer_type": "text"
         },
         {
             "id": 2,
             "question": "Which of these hero named {replace}?",
-            "answer_type": "image",
-            "difficulty": "easy"
+            "answer_type": "image"
         },
         {
             "id": 3,
             "question": "What is the primary attribute of this hero?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "answer_type": "text_icon"
         },
         {
             "id": 4,
             "question": "Which of these hero has primary attribute of {replace}?",
-            "answer_type": "image",
-            "difficulty": "medium"
+            "answer_type": "image"
         },
         {
             "id": 5,
-            "question": "What is the movement speed of this hero?",
-            "answer_type": "text_icon",
-            "difficulty": "hard"
+            "question": "What is the base movement speed of this hero?",
+            "answer_type": "text_icon"
         },
         {
             "id": 6,
             "question": "What is the attack type of this hero?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "answer_type": "text_icon"
         },
         {
             "id": 7,
             "question": "How many legs of this hero has?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "answer_type": "text_icon"
         },
         {
             "id": 8,
             "question": "Which hero has this ability?",
-            "answer_type": "image",
-            "difficulty": "medium"
+            "answer_type": "image"
         },
         {
             "id": 9,
             "question": "What is the name of this ability?",
-            "answer_type": "text",
-            "difficulty": "hard"
+            "answer_type": "text"
         },
         {
             "id": 10,
             "question": "What is the mana cost of this ability?",
-            "answer_type": "text_icon",
-            "difficulty": "hard"
+            "answer_type": "text_icon"
         },
         {
             "id": 11,
             "question": "What is the mana cost of this ability?",
-            "answer_type": "text_icon",
-            "difficulty": "hard"
+            "answer_type": "text_icon"
         },
         {
             "id": 12,
             "question": "What is the damage type of this ability?",
-            "answer_type": "text_icon",
-            "difficulty": "hard"
+            "answer_type": "text_icon"
         },
         {
             "id": 13,
             "question": "What is the cooldown of this ability?",
-            "answer_type": "text_icon",
-            "difficulty": "hard"
+            "answer_type": "text_icon"
         },
         {
             "id": 14,
             "question": "What is the name of this item?",
-            "answer_type": "text",
-            "difficulty": "medium"
+            "answer_type": "text"
         },
         {
             "id": 15,
             "question": "What is the cost of this item?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "answer_type": "text_icon"
         },
         {
             "id": 16,
             "question": "What is the cooldown of this item?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "answer_type": "text_icon"
         },
         {
             "id": 17,
-            "question": "What is the cooldown of this item?",
-            "answer_type": "text_icon",
-            "difficulty": "medium"
+            "question": "What is the mana cost of this item?",
+            "answer_type": "text_icon"
         },
         {
             "id": 18,
             "question": "Which of these abilities named {replace}?",
-            "answer_type": "image",
-            "difficulty": "hard"
+            "answer_type": "image"
         },
         {
             "id": 19,
             "question": "Which of these items named {replace}?",
-            "answer_type": "image",
-            "difficulty": "hard"
+            "answer_type": "image"
         }
     ]
 }
