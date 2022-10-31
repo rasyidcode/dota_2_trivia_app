@@ -66,7 +66,7 @@ class GameplayCubit extends Cubit<GameplayState> {
   }
 
   void checkResult() async {
-    var answers = state.questions?[state.activeQuestion ?? 0].answers;
+    var answers = state.questions?[state.activeQuestion ?? 0].options;
 
     var correctAnswer = answers?.firstWhere((answer) => answer.correct == true);
     if (state.selectedAnswer == correctAnswer?.label) {

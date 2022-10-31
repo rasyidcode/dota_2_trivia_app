@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dota_2_trivia_app/data/model/hero/hero.dart';
+import 'package:dota_2_trivia_app/data/model/question/question.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -13,8 +14,30 @@ class TriviaDatabase {
     String path = await getDatabasesPath();
     _db = await openDatabase(
       join(path, 'dota_trivia.db'),
-      version: 1,
+      version: 3,
       onCreate: _onCreate,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        await db.execute('''
+          CREATE TABLE IF NOT EXISTS questions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            question TEXT NULL,
+            image_url TEXT NULL,
+            option_type TEXT NULL,
+            template_id INTEGER NULL,
+            hide_label INTEGER NULL
+          )
+      ''');
+        await db.execute('''
+          CREATE TABLE IF NOT EXISTS options (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            question_id INTEGER NULL,
+            label TEXT NULL,
+            content TEXT NULL,
+            correct INTEGER NULL,
+            icon_url TEXT NULL
+          )
+      ''');
+      },
     );
   }
 
@@ -72,25 +95,6 @@ class TriviaDatabase {
           cooldown INTEGER NULL
         )
     ''');
-    // await db.execute('''
-    //     CREATE TABLE IF NOT EXISTS questions (
-    //       id INTEGER PRIMARY KEY AUTOINCREMENT,
-    //       question TEXT NULL,
-    //       image_url TEXT NULL,
-    //       answer_type TEXT NULL,
-    //       template_id INTEGER NULL
-    //     )
-    // ''');
-    // await db.execute('''
-    //     CREATE TABLE IF NOT EXISTS options (
-    //       id INTEGER PRIMARY KEY AUTOINCREMENT,
-    //       question_id INTEGER NULL,
-    //       label TEXT NULL,
-    //       content TEXT NULL,
-    //       correct INTEGER NULL,
-    //       icon_url TEXT NULL
-    //     )
-    // ''');
   }
 
   Future<void> updateLastChecked() async {
@@ -124,8 +128,9 @@ class TriviaDatabase {
   }
 
   Future<void> saveHeroes(Map<String, dynamic> heroes) async {
+    Batch? batch = _db?.batch();
     heroes.forEach(
-      (_, hero) => _db?.batch().rawInsert(
+      (_, hero) => batch?.rawInsert(
         '''
         INSERT INTO heroes(
             code, 
@@ -150,7 +155,7 @@ class TriviaDatabase {
       ),
     );
 
-    await _db?.batch().commit(noResult: true);
+    await batch?.commit(noResult: true);
   }
 
   Future<void> saveHeroAbilities(Map<String, dynamic> heroAbilities) async {
@@ -259,7 +264,7 @@ class TriviaDatabase {
       throw NoResultFoundException();
     }
 
-    return heroes.map((item) => HeroItem.fromJson(item)).toList();
+    return heroes.map((rawHero) => HeroItem.fromJson(rawHero)).toList();
   }
 
   Future<HeroItem> getHero(int id) async {
@@ -274,6 +279,91 @@ class TriviaDatabase {
     }
 
     return hero.map((item) => HeroItem.fromJson(item)).toList()[0];
+  }
+
+  Future<List<HeroItem>> get4RandomHeroes() async {
+    final heroes = await _db?.rawQuery('SELECT * FROM heroes ORDER BY id ASC');
+
+    if (heroes == null) {
+      throw DatabaseResultNullException();
+    }
+
+    if (heroes.isEmpty) {
+      throw NoResultFoundException();
+    }
+
+    return (heroes.map((rawHero) => HeroItem.fromJson(rawHero)).toList()
+          ..shuffle())
+        .take(4)
+        .toList();
+  }
+
+  Future<void> insertQuestion(QuestionItem item) async {
+    int? id = await _db?.rawInsert('''
+      INSERT INTO questions(
+        question,
+        image_url,
+        option_type,
+        template_id,
+        hide_label
+      ) VALUES(?, ?, ?, ?, ?)
+    ''', [
+      item.question,
+      item.imageUrl,
+      item.optionType.name,
+      item.templateId,
+      item.hideLabel ? 1 : 0,
+    ]);
+
+    Batch? batch = _db?.batch();
+
+    for (var option in item.options) {
+      batch?.rawInsert('''
+        INSERT INTO options(
+          question_id,
+          label,
+          content,
+          correct,
+          icon_url
+        ) VALUES(?, ?, ?, ?, ?)
+    ''', [
+        id,
+        option.label,
+        option.content,
+        option.correct ? 1 : 0,
+        option.iconUrl,
+      ]);
+    }
+
+    await batch?.commit(noResult: true);
+  }
+
+  Future<List<QuestionItem>> getQuestions() async {
+    final rawQuestions =
+        await _db?.rawQuery('SELECT * FROM questions ORDER BY id ASC');
+
+    if (rawQuestions == null) {
+      throw DatabaseResultNullException();
+    }
+
+    if (rawQuestions.isEmpty) {
+      throw NoResultFoundException();
+    }
+
+    final result = <QuestionItem>[];
+
+    for (var rawQuestion in rawQuestions) {
+      var options = await _db?.rawQuery(
+          'SELECT * FROM options WHERE question_id = ?', [rawQuestion['id']]);
+
+      if (options != null) {
+        rawQuestion['options'] = options;
+
+        result.add(QuestionItem.fromJson(rawQuestion));
+      }
+    }
+
+    return result;
   }
 }
 

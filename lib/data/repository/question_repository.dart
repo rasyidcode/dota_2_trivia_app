@@ -68,15 +68,15 @@ class QuestionRepository {
 
     // List<String> labels = ['a', 'b', 'c', 'd'];
 
-    // // (heroesResult.heroes..shuffle()).take(10).forEach((hero) {
-    // //   Map<String, dynamic> template = (templates..shuffle()).first;
-    // //   List<HeroItem> options = (heroesResult.heroes
-    // //         ..shuffle()
-    // //         ..removeWhere((element) => element.id == hero.id))
-    // //       .take(3)
-    // //       .toList()
-    // //     ..add(hero)
-    // //     ..shuffle();
+    // (heroesResult.heroes..shuffle()).take(10).forEach((hero) {
+    //   Map<String, dynamic> template = (templates..shuffle()).first;
+    //   List<HeroItem> options = (heroesResult.heroes
+    //         ..shuffle()
+    //         ..removeWhere((element) => element.id == hero.id))
+    //       .take(3)
+    //       .toList()
+    //     ..add(hero)
+    //     ..shuffle();
 
     //   Map<String, dynamic> question;
 

@@ -4,6 +4,7 @@ import 'package:dota_2_trivia_app/injection_container.dart';
 import 'package:dota_2_trivia_app/ui/endless/endless_page.dart';
 import 'package:dota_2_trivia_app/ui/gameplay/gameplay_page.dart';
 import 'package:dota_2_trivia_app/ui/splash/splash_page.dart';
+import 'package:dota_2_trivia_app/ui/trivia/trivia_page.dart';
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 
@@ -25,10 +26,11 @@ class Dota2TriviaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dota 2 Trivia',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        primaryColor: kPrimaryColor,
-      ),
-      home: const SplashPage(),
+      theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: kPrimaryColor,
+          fontFamily: 'NotoSans'),
+      home: const TriviaPage(),
     );
   }
 }

@@ -37,14 +37,14 @@ class QuestionArea extends StatelessWidget {
                         ),
                   ),
                 ),
-                Expanded(
-                  child: currentQuestion.image != null
-                      ? Image.network(
-                          currentQuestion.image!,
-                          width: 150,
-                        )
-                      : const SizedBox(width: 150),
-                )
+                // Expanded(
+                //   child: currentQuestion.image != null
+                //       ? Image.network(
+                //           currentQuestion.image!,
+                //           width: 150,
+                //         )
+                //       : const SizedBox(width: 150),
+                // )
               ],
             ),
           ),

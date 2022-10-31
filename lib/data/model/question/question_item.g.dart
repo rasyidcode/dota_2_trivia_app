@@ -8,11 +8,11 @@ part of 'question_item.dart';
 
 QuestionItem _$QuestionItemFromJson(Map<String, dynamic> json) => QuestionItem(
       question: json['question'] as String,
-      image: json['image'] as String?,
-      answers: (json['answers'] as List<dynamic>)
-          .map((e) => AnswerItem.fromJson(e as Map<String, dynamic>))
+      imageUrl: json['image_url'] as String?,
+      options: (json['options'] as List<dynamic>)
+          .map((e) => OptionItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      answerType: json['answer_type'] as String,
+      optionType: $enumDecode(_$OptionTypeEnumMap, json['option_type']),
       templateId: json['template_id'] as int,
       hideLabel: json['hide_label'] as bool,
     );
@@ -20,9 +20,15 @@ QuestionItem _$QuestionItemFromJson(Map<String, dynamic> json) => QuestionItem(
 Map<String, dynamic> _$QuestionItemToJson(QuestionItem instance) =>
     <String, dynamic>{
       'question': instance.question,
-      'image': instance.image,
-      'answers': instance.answers,
-      'answer_type': instance.answerType,
+      'image_url': instance.imageUrl,
+      'options': instance.options.map((e) => e.toJson()).toList(),
+      'option_type': _$OptionTypeEnumMap[instance.optionType]!,
       'template_id': instance.templateId,
       'hide_label': instance.hideLabel,
     };
+
+const _$OptionTypeEnumMap = {
+  OptionType.text: 'text',
+  OptionType.textIcon: 'text_icon',
+  OptionType.image: 'image',
+};

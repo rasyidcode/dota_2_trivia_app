@@ -115,14 +115,14 @@ class AnswerItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (qItem.answerType == 'text')
-                  AnswerContentTextOnly(text: content)
-                else if (qItem.answerType == 'image')
-                  AnswerContentImage(url: content)
-                else if (qItem.answerType == 'text_icon')
-                  AnswerContentTextIcon(text: content, iconURL: icon ?? '')
-                else
-                  Container(),
+                // if (qItem.answerType == 'text')
+                //   AnswerContentTextOnly(text: content)
+                // else if (qItem.answerType == 'image')
+                //   AnswerContentImage(url: content)
+                // else if (qItem.answerType == 'text_icon')
+                //   AnswerContentTextIcon(text: content, iconURL: icon ?? '')
+                // else
+                Container(),
                 isCorrect == null
                     ? Container()
                     : Positioned(
